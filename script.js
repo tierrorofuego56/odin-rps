@@ -7,6 +7,7 @@ let count = 0;
 const player_status = document.getElementById(`player`);
 const computer_status = document.getElementById(`cpu`);
 const outcome = document.getElementById(`outcome`);
+const result = document.getElementById("result");
 
 const win_status = document.getElementById(`win`);
 const loss_status = document.getElementById(`lose`);
@@ -28,18 +29,13 @@ function getPlayerChoice(){
 
 function playRound(ps, os){
 
-    player_status.innerHTML = `Player: ${ps}`
-    computer_status.innerHTML = `Opponent: ${os}`
+    ps = ps.toUpperCase();
 
-    win_status.innerHTML = `Wins: ${wins}`
-    loss_status.innerHTML = `Losses: ${losses}`
-    draw_status.innerHTML = `Draws: ${draws}`
-
-    if(ps === `ROCK` || ps === `Rock` || ps === `rock`){
+    if(ps === `ROCK`){
         
-        /*Test*/ 
+    
         outcome.innerHTML += `Round ${count}: `
-        /*Test*/
+        
         
         if(os === `ROCK`){
             draws++
@@ -54,11 +50,9 @@ function playRound(ps, os){
             outcome.innerHTML += `You win! ROCK beats SCISSORS!<br>`
         }
     }
-    else if(ps === `PAPER` || ps === `Paper` || ps === `paper`){
+    else if(ps === `PAPER`){
 
-        /*Test*/ 
         outcome.innerHTML += `Round ${count}: `
-        /*Test*/
         
         if(os === `PAPER`){ 
             draws++
@@ -73,11 +67,9 @@ function playRound(ps, os){
             outcome.innerHTML += `You win! PAPER beats ROCK!<br>`
         }
     }
-    else if(ps === `SCISSORS` || ps === `Scissors` || ps  === `scissors`){
+    else if(ps === `SCISSORS`){
 
-        /*Test*/ 
         outcome.innerHTML += `Round ${count}: `
-        /*Test*/
 
         if(os === `SCISSORS`){
             draws++
@@ -97,7 +89,24 @@ function playRound(ps, os){
         outcome.innerHTML = `Input invalid!`
     }
 
-    
+    player_status.innerHTML = `Player: ${ps}`
+    computer_status.innerHTML = `Opponent: ${os}`
+
+    win_status.innerHTML = `Wins: ${wins}`
+    loss_status.innerHTML = `Losses: ${losses}`
+    draw_status.innerHTML = `Draws: ${draws}`
+}
+
+function showResult(){
+    if(wins > losses){
+        result.innerHTML = "Result: YOU WIN!";
+    }
+    else if(losses > wins){
+        result.innerHTML = "Result: you lose...";
+    }
+    else{
+        result.innerHTML = "Result: Draw!";
+    }
 }
 
 function playGame(){
@@ -105,6 +114,7 @@ function playGame(){
         count++
         playRound(getPlayerChoice(), getComputerChoice())
     }
+    showResult()
 }
 
 
